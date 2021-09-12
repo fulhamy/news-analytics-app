@@ -23,3 +23,5 @@ st.write("""
 ## Volume Price
 """)
 st.line_chart(tickerDf.Volume)
+
+streamlit run python.py
