@@ -39,7 +39,7 @@ try:
     #  create a new cursor
     cur = conn.cursor()
     cur.execute(read_table)
-
+    cur.fetchall()
     print(cur.fetchall())
        
      # close the communication with the HerokuPostgres
