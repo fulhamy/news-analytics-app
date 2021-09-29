@@ -5,7 +5,7 @@ import psycopg2, os
 # read database connection url from the enivron variable we just set.
 DATABASE_URL = os.environ.get('DATABASE_URL')
 
-read_table = """SELECT date_Trunc('month', """published_at"""::date), count(distinct """UID"""), count("""UID""") from news_log where length("""published_at""") > 10 group by 1 having count("""UID""") > 100 order by 1"""
+read_table = """SELECT date_Trunc('month', published_at::date), count(distinct UID), count(UID) from news_log where length(published_at) > 10 group by 1 having count(UID) > 100 order by 1"""
 
 con = None
 
