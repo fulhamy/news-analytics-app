@@ -53,6 +53,14 @@ finally:
     if con is not None:
         con.close()
         print('Database connection closed.')
+        
+hide_streamlit_style = """
+            <style>
+            #MainMenu {visibility: hidden;}
+            footer {visibility: hidden;}
+            </style>
+            """
+st.markdown(hide_streamlit_style, unsafe_allow_html=True) 
 
 
 
