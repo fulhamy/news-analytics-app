@@ -1,11 +1,20 @@
 import yfinance as yf
 import streamlit as st
 import psycopg2, os
+import pandas as pd
 
 # read database connection url from the enivron variable we just set.
 DATABASE_URL = os.environ.get('DATABASE_URL')
 
 con = None
+
+hide_streamlit_style = """
+            <style>
+            #MainMenu {visibility: hidden;}
+            footer {visibility: hidden;}
+            </style>
+            """
+st.markdown(hide_streamlit_style, unsafe_allow_html=True) 
 
 st.write("""
 # Simple Stock Price App
@@ -38,6 +47,7 @@ try:
     cur = con.cursor()
     read_table = """SELECT date_Trunc('month', "published_at"::date), count(distinct "UID"), count("UID") from news_log where length("published_at") > 10 group by 1 having count("UID") > 100 order by 1;"""
     cur.execute(read_table)
+    dat = pd.read_sql_query(read_table, con)
     cur.fetchall()
     print(cur.fetchall())
        
@@ -53,13 +63,6 @@ finally:
         con.close()
         print('Database connection closed.')
         
-hide_streamlit_style = """
-            <style>
-            #MainMenu {visibility: hidden;}
-            footer {visibility: hidden;}
-            </style>
-            """
-st.markdown(hide_streamlit_style, unsafe_allow_html=True) 
 
 
 
