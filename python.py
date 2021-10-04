@@ -37,7 +37,7 @@ try:
     con = psycopg2.connect(DATABASE_URL)
 
     #  create a new cursor
-    cur = conn.cursor()
+    cur = con.cursor()
     cur.execute(read_table)
     cur.fetchall()
     print(cur.fetchall())
