@@ -31,6 +31,7 @@ try:
     cur.execute(read_table)
     df = pd.read_sql_query(read_table, con)
     df = df.set_index('date')
+    df
     cur.fetchall()
     print(cur.fetchall())
     print(df)
