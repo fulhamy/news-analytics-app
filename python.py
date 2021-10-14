@@ -45,7 +45,7 @@ try:
 
     #  create a new cursor
     cur = con.cursor()
-    read_table = """SELECT date_Trunc('month', "published_at"::date) date, count(distinct "UID") articles, count("UID") from news_log where length("published_at") > 21 group by 1 having count("UID") > 100 order by 1;"""
+    read_table = """SELECT date_Trunc('month', "published_at"::date) date, count(distinct "UID") articles from news_log where length("published_at") > 21 group by 1 having count("UID") > 100 order by 1;"""
     cur.execute(read_table)
     dat = pd.read_sql_query(read_table, con)
     cur.fetchall()
@@ -67,11 +67,6 @@ finally:
 st.write("""
 ## Closing Price
 """)
-st.line_chart(dat.date)
-st.write("""
-## Volume Price
-""")
-st.line_chart(dat.articles)
-
+st.line_chart(dat)
 
 
