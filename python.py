@@ -50,7 +50,7 @@ try:
     dat = pd.read_sql_query(read_table, con)
     cur.fetchall()
     print(cur.fetchall())
-       
+    print(dat)
      # close the communication with the HerokuPostgres
     cur.close()
 except Exception as error:
