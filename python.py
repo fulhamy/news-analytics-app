@@ -52,6 +52,5 @@ st.write("""
 ## Articles by Month
 """)
 st.line_chart(dat)
-st.write(dat.head())
 
 
