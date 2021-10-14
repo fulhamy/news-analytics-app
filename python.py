@@ -65,7 +65,7 @@ finally:
         
 
 st.write("""
-## Closing Price
+## Articles by Month
 """)
 st.line_chart(dat)
 
