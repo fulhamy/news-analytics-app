@@ -17,8 +17,8 @@ hide_streamlit_style = """
 st.markdown(hide_streamlit_style, unsafe_allow_html=True) 
 
 st.write("""
-# Simple Stock Price App
-Shown are the stock **closing price** and ***volume*** of Google!
+# ABC News 
+The public consciousness is shaped by the News. The purpose of this project is to shine a light on how Australia's public broadcaster has directed the public square in the digital age.
 """)
 
 # https://towardsdatascience.com/how-to-get-stock-data-using-python-c0de1df17e75
