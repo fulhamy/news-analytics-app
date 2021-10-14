@@ -27,7 +27,7 @@ try:
 
     #  create a new cursor
     cur = con.cursor()
-    read_table = """SELECT date_Trunc('month', "published_at"::date) date, count(distinct "UID") articles from news_log where length("published_at") > 21 group by 1 having count("UID") > 100 order by 1;"""
+    read_table = """SELECT left(date_Trunc('month', "published_at"::date),10) date, count(distinct "UID") articles from news_log where length("published_at") > 21 group by 1 having count("UID") > 100 order by 1;"""
     cur.execute(read_table)
     dat = pd.read_sql_query(read_table, con)
     cur.fetchall()
