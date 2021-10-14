@@ -33,7 +33,7 @@ try:
     df = df.set_index('date')
     cur.fetchall()
     print(cur.fetchall())
-    print(dat)
+    print(df)
      # close the communication with the HerokuPostgres
     cur.close()
 except Exception as error:
@@ -50,7 +50,7 @@ finally:
 st.write("""
 ## Articles by Month
 """)
-st.line_chart(dat)
-st.write(dat.head())
+st.line_chart(df)
+st.write(df.head())
 
 
