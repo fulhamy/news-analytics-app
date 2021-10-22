@@ -31,10 +31,11 @@ try:
     cur.execute(read_table)
     df = pd.read_sql_query(read_table, con)
     df = df.set_index('date')
+    data = df
     Total = df['articles'].sum()
     cur.fetchall()
     print(cur.fetchall())
-    print(df)
+    print(data)
      # close the communication with the HerokuPostgres
     cur.close()
 except Exception as error:
@@ -52,6 +53,6 @@ st.metric(label="Articles", value=Total)
 st.write("""
 ## Articles by Month
 """)
-st.line_chart(df)
+st.line_chart(data)
 
 
