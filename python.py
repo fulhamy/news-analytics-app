@@ -27,7 +27,7 @@ try:
 
     #  create a new cursor
     cur = con.cursor()
-    read_table = """SELECT * from mymatview"""
+    read_table = """SELECT date,articeles from mymatview2"""
     cur.execute(read_table)
     df = pd.read_sql_query(read_table, con)
     df = df.set_index('date')
