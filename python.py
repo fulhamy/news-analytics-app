@@ -31,10 +31,10 @@ try:
     cur.execute(read_table)
     df = pd.read_sql_query(read_table, con)
     df = df.set_index('date')
-    dat = df
+    Total = df['articles'].sum()
     cur.fetchall()
     print(cur.fetchall())
-    print(dat)
+    print(df)
      # close the communication with the HerokuPostgres
     cur.close()
 except Exception as error:
@@ -47,10 +47,11 @@ finally:
         con.close()
         print('Database connection closed.')
         
+st.metric(label="Articles", value=Total)
 
 st.write("""
 ## Articles by Month
 """)
-st.line_chart(dat)
+st.line_chart(df)
 
 
