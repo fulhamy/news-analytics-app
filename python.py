@@ -53,7 +53,7 @@ finally:
 st.write("""
 ## Articles by Year
 """)
-st.bar_chart(data)
+st.bar_chart(data,width=1)
 
 
 
