@@ -27,12 +27,12 @@ try:
 
     #  create a new cursor
     cur = con.cursor()
-    read_table = """SELECT year(date) date, sum(articles) articles from mymatview2 group by 1 order by 1"""
+    read_table = """SELECT year(date) as date, sum(articles) as articles from mymatview2 group by 1 order by 1"""
     cur.execute(read_table)
     df = pd.read_sql_query(read_table, con)
     df = df.set_index('date')
     data = df
-    Total = int(df['articles'].sum())
+    total_articles = int(df['articles'].sum())
     cur.fetchall()
     print(cur.fetchall())
     print(data)
@@ -54,5 +54,6 @@ st.write("""
 ## Articles by Month
 """)
 st.line_chart(data)
+
 
 
