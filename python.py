@@ -32,7 +32,7 @@ try:
     df = pd.read_sql_query(read_table, con)
     df = df.set_index('date')
     data = df
-    Total = df['articles'].sum()
+    Total = int(df['articles'].sum())
     cur.fetchall()
     print(cur.fetchall())
     print(data)
