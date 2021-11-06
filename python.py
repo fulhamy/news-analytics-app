@@ -2,6 +2,7 @@ import yfinance as yf
 import streamlit as st
 import psycopg2, os
 import pandas as pd
+import plotly.figure_factory as ff
 
 # read database connection url from the enivron variable we just set.
 DATABASE_URL = os.environ.get('DATABASE_URL')
