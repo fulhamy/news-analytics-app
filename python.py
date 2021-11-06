@@ -48,7 +48,7 @@ finally:
         con.close()
         print('Database connection closed.')
         
-st.metric(label="Articles", value=int(Total), delta=None)
+# st.metric(label="Articles", value=int(Total), delta=None)
 
 st.write("""
 ## Articles by Month
