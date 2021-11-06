@@ -52,12 +52,10 @@ finally:
         
 # st.metric(label="Articles", value=int(Total), delta=None)
 
-
+fig = px.bar(px_data, x='date', y='articles')
 st.write("""
 ## Articles by Year
 """)
-fig = px.bar(px_data, x='date', y='articles')
-
 st.plotly_chart(fig, use_container_width=True)
 
 
