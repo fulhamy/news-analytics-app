@@ -2,7 +2,7 @@ import yfinance as yf
 import streamlit as st
 import psycopg2, os
 import pandas as pd
-import plotly.figure_factory as ff
+import plotly.express as px
 
 # read database connection url from the enivron variable we just set.
 DATABASE_URL = os.environ.get('DATABASE_URL')
@@ -51,12 +51,13 @@ finally:
         
 # st.metric(label="Articles", value=int(Total), delta=None)
 
-fig = ff.create_distplot(data['articles'], data['date'])
 
 st.write("""
 ## Articles by Year
 """)
 st.bar_chart(data,width=1)
+
+fig = px.bar(data, x='date', y='articles')
 
 st.plotly_chart(fig, use_container_width=True)
 
