@@ -51,12 +51,14 @@ finally:
         
 # st.metric(label="Articles", value=int(Total), delta=None)
 
+fig = ff.create_distplot(data['articles'], data['date'])
+
 st.write("""
 ## Articles by Year
 """)
 st.bar_chart(data,width=1)
 
-st.plotly_chart(data, use_container_width=True)
+st.plotly_chart(fig, use_container_width=True)
 
 
 
