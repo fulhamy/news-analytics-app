@@ -31,6 +31,7 @@ try:
     read_table = """SELECT date_trunc('year', date) as date, sum(articles) as articles from mymatview2 group by 1 order by 1"""
     cur.execute(read_table)
     df = pd.read_sql_query(read_table, con)
+    px_data = pd.read_sql_query(read_table, con)
     df = df.set_index('date')
     data = df
     total_articles = int(df['articles'].sum())
@@ -57,7 +58,7 @@ st.write("""
 """)
 st.bar_chart(data,width=1)
 
-fig = px.bar(data, x='date', y='articles')
+fig = px.bar(px_data, x='date', y='articles')
 
 st.plotly_chart(fig, use_container_width=True)
 
