@@ -51,7 +51,7 @@ finally:
 # st.metric(label="Articles", value=int(Total), delta=None)
 
 st.write("""
-## Articles by Month
+## Articles by Year
 """)
 st.bar_chart(data)
 
