@@ -56,8 +56,6 @@ finally:
 st.write("""
 ## Articles by Year
 """)
-st.bar_chart(data,width=1)
-
 fig = px.bar(px_data, x='date', y='articles')
 
 st.plotly_chart(fig, use_container_width=True)
