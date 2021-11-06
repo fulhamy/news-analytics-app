@@ -55,5 +55,7 @@ st.write("""
 """)
 st.bar_chart(data,width=1)
 
+st.plotly_chart(data, use_container_width=True)
+
 
 
