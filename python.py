@@ -53,7 +53,7 @@ finally:
 st.write("""
 ## Articles by Month
 """)
-st.line_chart(data)
+st.bar_chart(data)
 
 
 
