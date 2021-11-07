@@ -52,7 +52,7 @@ finally:
         
 # st.metric(label="Articles", value=int(Total), delta=None)
 
-fig = px.bar(px_data, x='date', y='articles')
+fig = px.bar(px_data, x='Date', y='Count of articles')
 st.write("""
 ## Articles by Year
 """)
