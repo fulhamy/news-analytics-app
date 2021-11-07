@@ -19,7 +19,7 @@ st.markdown(hide_streamlit_style, unsafe_allow_html=True)
 
 st.write("""
 # ABC News 
-The public consciousness is shaped by the News. The purpose of this project is to shine a light on how Australia's public broadcaster has directed the public square in the digital age.
+Public consciousness is shaped by the News. The purpose of this project is to shine a light on how Australia's public broadcaster influences the public square in the digital age.
 """)
 
 try:
