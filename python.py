@@ -32,9 +32,9 @@ try:
     cur.execute(read_table)
     df = pd.read_sql_query(read_table, con)
     px_data = pd.read_sql_query(read_table, con)
-    df = df.set_index('date')
+    df = df.set_index('Date')
     data = df
-    total_articles = int(df['articles'].sum())
+    total_articles = int(df['Articles'].sum())
     cur.fetchall()
     print(cur.fetchall())
     print(data)
