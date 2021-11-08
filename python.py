@@ -28,7 +28,7 @@ try:
 
     #  create a new cursor
     cur = con.cursor()
-    read_table = """SELECT date_trunc('year', date) as Date, sum(articles) as 'Count of Articles' from mymatview2 group by 1 order by 1"""
+    read_table = """SELECT date_trunc('year', date) as Date, sum(articles) as Articles from mymatview2 group by 1 order by 1"""
     cur.execute(read_table)
     df = pd.read_sql_query(read_table, con)
     px_data = pd.read_sql_query(read_table, con)
@@ -52,7 +52,7 @@ finally:
         
 # st.metric(label="Articles", value=int(Total), delta=None)
 
-fig = px.bar(px_data, x='Date', y='Count of Articles')
+fig = px.bar(px_data, x='Date', y='Articles')
 st.write("""
 ## Articles by Year
 """)
