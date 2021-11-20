@@ -28,7 +28,7 @@ try:
 
     #  create a new cursor
     cur = con.cursor()
-    read_table = """SELECT date_trunc('year', date) as date, sum(articles) as articles from mymatview2 group by 1 order by 1"""
+    read_table = """SELECT date_trunc('year', date) as date, sum(articles) as articles from mymatview3 group by 1 order by 1"""
     cur.execute(read_table)
     df = pd.read_sql_query(read_table, con)
     px_data = pd.read_sql_query(read_table, con)
