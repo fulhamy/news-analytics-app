@@ -57,7 +57,7 @@ st.write("""
 fig = px.bar(px_data, x='date', y=px_data.articles.round(2),text='articles')
 st.plotly_chart(fig, use_container_width=True)
  
-Col1,Col2 = st.column(1,1)
+Col1,Col2 = st.columns(1,1)
 
 Col1.header('Polarity')
 
