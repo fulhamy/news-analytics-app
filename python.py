@@ -28,16 +28,14 @@ try:
 
     #  create a new cursor
     cur = con.cursor()
-    read_table = """SELECT date_trunc('year', date) as date, sum(articles) as articles from mymatview3 group by 1 order by 1"""
+    read_table = """SELECT date, articles::int as articles, polarity,subjectivity as subjectivity from mymatview3 where articles > 1000  order by 1"""  
     cur.execute(read_table)
     df = pd.read_sql_query(read_table, con)
     px_data = pd.read_sql_query(read_table, con)
     df = df.set_index('date')
     data = df
     total_articles = int(df['articles'].sum())
-    cur.fetchall()
-    print(cur.fetchall())
-    print(data)
+
      # close the communication with the HerokuPostgres
     cur.close()
 except Exception as error:
@@ -57,6 +55,18 @@ st.write("""
 ## Articles by Year
 """)
 st.plotly_chart(fig, use_container_width=True)
+st.write("""
+## Polarity
+""")
+fig1 = px.line(px_data, x='date', y=px_data.polarity.round(4),text=px_data.polarity.round(4))
+st.plotly_chart(fig1, use_container_width=True)
+st.write("""
+## Subjectivity
+""")
+fig2 = px.line(px_data, x='date', y=px_data.subjectivity.round(4),text=px_data.subjectivity.round(4))
+st.plotly_chart(fig2, use_container_width=True)
+
+
 
 
 
