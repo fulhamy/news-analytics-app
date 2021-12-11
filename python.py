@@ -56,16 +56,20 @@ st.write("""
 """)
 fig = px.bar(px_data, x='date', y=px_data.articles.round(2),text='articles')
 st.plotly_chart(fig, use_container_width=True)
-st.write("""
-## Polarity
-""")
-fig1 = px.line(px_data, x='date', y=px_data.polarity.round(4),text=px_data.polarity.round(4))
-st.plotly_chart(fig1, use_container_width=True)
-st.write("""
+ 
+Col1,Col2 = st.column(1,1)
+
+Col1.header('Polarity')
+
+Col1.fig1 = px.line(px_data, x='date', y=px_data.polarity.round(4),text=px_data.polarity.round(4))
+Col1.st.plotly_chart(fig1, use_container_width=True)
+
+
+Col2.st.write("""
 ## Subjectivity
 """)
-fig2 = px.line(px_data, x='date', y=px_data.subjectivity.round(4),text=px_data.subjectivity.round(4))
-st.plotly_chart(fig2, use_container_width=True)
+Col2.fig2 = px.line(px_data, x='date', y=px_data.subjectivity.round(4),text=px_data.subjectivity.round(4))
+Col2.st.plotly_chart(fig2, use_container_width=True)
 
 
 
