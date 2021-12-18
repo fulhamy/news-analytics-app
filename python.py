@@ -64,10 +64,7 @@ col1.header('Polarity')
 fig1 = px.line(px_data, x='date', y=px_data.polarity.round(4),text=px_data.polarity.round(4))
 col1.plotly_chart(fig1, use_container_width=True)
 
-
-col2.st.write("""
-## Subjectivity
-""")
+col2.header('Subjectivity')
 fig2 = px.line(px_data, x='date', y=px_data.subjectivity.round(4),text=px_data.subjectivity.round(4))
 col2.plotly_chart(fig2, use_container_width=True)
 
