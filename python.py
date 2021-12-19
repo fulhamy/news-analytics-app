@@ -4,6 +4,8 @@ import psycopg2, os
 import pandas as pd
 import plotly.express as px
 
+st.set_page_config(layout="wide")
+
 # read database connection url from the enivron variable we just set.
 DATABASE_URL = os.environ.get('DATABASE_URL')
 
@@ -16,8 +18,6 @@ hide_streamlit_style = """
             </style>
             """
 st.markdown(hide_streamlit_style, unsafe_allow_html=True) 
-
-st.set_page_config(layout="wide")
 
 st.write("""
 # ABC News 
