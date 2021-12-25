@@ -60,7 +60,7 @@ fig = px.bar(px_data, x='date', y=px_data.articles.round(2),text='articles',titl
 fig.update_traces(textfont_size=12, textangle=0, textposition="outside", cliponaxis=False)
 st.plotly_chart(fig, use_container_width=True)
  
-col1, col2 = st.columns(2)
+col1, col2 = st.columns(2) 
 
 st.write("""
 ## Polarity
