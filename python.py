@@ -57,6 +57,7 @@ st.write("""
 ## Articles by Year
 """)
 fig = px.bar(px_data, x='date', y=px_data.articles.round(2),text='articles',title="Count of articles",text_auto='.2s')
+fig.update_traces(textfont_size=12, textangle=0, textposition="outside", cliponaxis=False)
 st.plotly_chart(fig, use_container_width=True)
  
 col1, col2 = st.columns(2)
