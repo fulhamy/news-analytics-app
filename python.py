@@ -55,7 +55,7 @@ finally:
 def convert_to_thousands(values):
     return [str(num/1000)+'k' for num in values]
 
-px_data['articles'] = convert_to_thousands(px_data['articles'])
+px_data['articles'] = convert_to_thousands(int(px_data['articles']))
 
 st.write("""
 ## Articles by Year
