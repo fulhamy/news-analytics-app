@@ -60,7 +60,7 @@ px_data['articles'] = convert_to_thousands(px_data.articles.astype(int))
 st.write("""
 ## Articles by Year
 """)
-fig = px.bar(px_data, x='date', y=px_data.articles.round(2),text='articles',title="Count of articles")
+fig = px.bar(px_data, x='date', y='articles',text='articles',title="Count of articles")
 fig.update_traces(textfont_size=12, textangle=0, textposition="outside", cliponaxis=False)
 st.plotly_chart(fig, use_container_width=True)
  
