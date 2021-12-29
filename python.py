@@ -52,8 +52,16 @@ finally:
         
 # st.metric(label="Articles", value=int(Total), delta=None)
 
+# Sort data before converting to a string for readability
+
+px_data = px_data.sort_values(by=['articles'], ascending=False)
+
+# Function to round to abbreviate a thousand with 'K'
+
 def convert_to_thousands(values):
-    return [str(num/1000)+'k' for num in values]
+    return [str(num/1000)+'K' for num in values]
+
+# Abbreviate article count with thousands
 
 px_data['articles'] = convert_to_thousands(px_data.articles.astype(int))
 
