@@ -54,7 +54,7 @@ finally:
 
 # Sort data before converting to a string for readability
 
-px_data = px_data.sort_values(by=['articles'], ascending=False)
+px_data = px_data.sort_values(by=['articles'], ascending=True)
 
 # Function to round to abbreviate a thousand with 'K'
 
