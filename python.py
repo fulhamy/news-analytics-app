@@ -68,7 +68,7 @@ px_data['articles_rounded'] = convert_to_thousands(px_data.articles.astype(int))
 col1, col2 = st.columns(2) 
 
 st.write("""
-## Articles by Year
+## ABC News produces high volumes of content and is increasingly Subjective and Polarised
 """)
 fig = px.bar(px_data, x='date', y='articles',text='articles_rounded',title="Count of Articles by Year")
 fig.update_traces(textfont_size=12, textangle=0, textposition="outside", cliponaxis=False)
