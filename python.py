@@ -69,18 +69,13 @@ st.write("""
 ## Articles by Year
 """)
 fig = px.bar(px_data, x='date', y='articles',text='articles_rounded',title="Count of Articles by Year")
+fig.update_traces(textfont_size=12, textangle=0, textposition="outside", cliponaxis=False)
 st.plotly_chart(fig, use_container_width=True)
  
 col1, col2 = st.columns(2) 
 
-st.write("""
-## Polarity
-""")
 fig1 = px.line(px_data, x='date', y=px_data.polarity.round(4),text=px_data.polarity.round(4),title="Polarity by Year" )
 st.plotly_chart(fig1, use_container_width=True)
 
-st.write("""
-## Subjectivity
-""")
 fig2 = px.line(px_data, x='date', y=px_data.subjectivity.round(4),text=px_data.subjectivity.round(4),title="Subjectivity by Year" )
 st.plotly_chart(fig2, use_container_width=True)
