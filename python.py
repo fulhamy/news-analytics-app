@@ -65,15 +65,17 @@ def convert_to_thousands(values):
 
 px_data['articles_rounded'] = convert_to_thousands(px_data.articles.astype(int))
 
+col1, col2 = st.columns(2) 
+
 st.write("""
 ## Articles by Year
 """)
 fig = px.bar(px_data, x='date', y='articles',text='articles_rounded',title="Count of Articles by Year")
 fig.update_traces(textfont_size=12, textangle=0, textposition="outside", cliponaxis=False)
 st.plotly_chart(fig, use_container_width=True)
- 
-col1, col2 = st.columns(2) 
 
+# Sort by Date for Polarity and Subjectivity charts
+px_data = px_data.sort_values(by=['date'], ascending=True)
 fig1 = px.line(px_data, x='date', y=px_data.polarity.round(4),text=px_data.polarity.round(4),title="Polarity by Year" )
 st.plotly_chart(fig1, use_container_width=True)
 
