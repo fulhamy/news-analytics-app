@@ -30,7 +30,7 @@ try:
 
     #  create a new cursor
     cur = con.cursor()
-    read_table = """SELECT date, articles::int as articles, polarity,subjectivity as subjectivity from mymatview3 where articles > 1000  order by 1"""  
+    read_table = """SELECT date, articles::int as articles, polarity,subjectivity as subjectivity from mymatview3 where articles > 5000  order by 1"""  
     cur.execute(read_table)
     df = pd.read_sql_query(read_table, con)
     px_data = pd.read_sql_query(read_table, con)
