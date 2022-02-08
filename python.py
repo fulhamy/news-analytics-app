@@ -1,3 +1,5 @@
+## https://medium.com/@u.praneel.nihar/building-multi-page-web-app-using-streamlit-7a40d55fa5b4#:~:text=As%20mentioned%20already%20streamlit%20does,app%20using%20a%20radio%20button.
+
 import yfinance as yf
 import streamlit as st
 import psycopg2, os
