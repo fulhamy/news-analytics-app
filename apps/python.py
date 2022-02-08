@@ -10,8 +10,6 @@ from PIL import Image
 def app():
             icon = Image.open("news_icon.png")
 
-            st.set_page_config(layout="wide",page_title='Paper Tale',page_icon=icon)
-
             # read database connection url from the enivron variable we just set.
             DATABASE_URL = os.environ.get('DATABASE_URL')
 
