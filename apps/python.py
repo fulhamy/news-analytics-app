@@ -15,14 +15,6 @@ def app():
 
             con = None
 
-            hide_streamlit_style = """
-                        <style>
-                        #MainMenu {visibility: hidden;}
-                        footer {visibility: hidden;}
-                        </style>
-                        """
-            st.markdown(hide_streamlit_style, unsafe_allow_html=True) 
-
             st.write("""
             # ABC News 
             Public consciousness is shaped by the News. The purpose of this project is to shine a light on how Australia's public broadcaster influences the public square in the digital age.
