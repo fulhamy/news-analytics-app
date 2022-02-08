@@ -1,13 +1,12 @@
 # main app to run application
 import streamlit as st
 from multiapp import MultiApp
-from apps import home, data_stats # import your app modules here
+from apps import python # import your app modules here
 
 app = MultiApp()
 
 # Add all your application here
-app.add_app("Home", home.app)
-app.add_app("Data Stats", data_stats.app)
+app.add_app("Home", python.app)
 
 # The main app
 app.run()
