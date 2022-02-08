@@ -1,12 +1,13 @@
-#app.py
-import app1
-import app2
+# main app to run application
 import streamlit as st
-PAGES = {
-    "App1": app1,
-    "App2": app2
-}
-st.sidebar.title('Navigation')
-selection = st.sidebar.radio("Go to", list(PAGES.keys()))
-page = PAGES[selection]
-page.app()
+from multiapp import MultiApp
+from apps import home, data_stats # import your app modules here
+
+app = MultiApp()
+
+# Add all your application here
+app.add_app("Home", home.app)
+app.add_app("Data Stats", data_stats.app)
+
+# The main app
+app.run()
