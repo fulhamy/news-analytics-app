@@ -21,7 +21,7 @@ st.markdown(hide_streamlit_style, unsafe_allow_html=True)
 app = MultiApp()
 
 # Add all your application here
-app.add_app("Home", python.app)
+app.add_app("Summary", python.app)
 
 # The main app
 app.run()
