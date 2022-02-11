@@ -1,7 +1,7 @@
 # main app to run application
 import streamlit as st
 from multiapp import MultiApp
-from apps import python # import your app modules here
+from apps import python,search # import your app modules here
 
 from PIL import Image
 
@@ -22,6 +22,7 @@ app = MultiApp()
 
 # Add all your application here
 app.add_app("Summary", python.app)
+app.add_app("Search", search.app)
 
 # The main app
 app.run()
