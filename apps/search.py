@@ -62,6 +62,11 @@ def app():
             px_data['articles_rounded'] = convert_to_thousands(px_data.articles.astype(int))
 
             col1, col2 = st.columns(2) 
+            
+            st.multiselect("A/B column",
+            options=df.columns,
+            help="Select which column refers to your A/B testing labels.",
+            default=ab_default,)
 
             st.write("""
             ## Mass produced content, increasingly Subjective and Polarised
