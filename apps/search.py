@@ -64,9 +64,8 @@ def app():
             col1, col2 = st.columns(2) 
             
             st.multiselect("A/B column",
-            options=df.columns,
-            help="Select which column refers to your A/B testing labels.",
-            default=ab_default,)
+            options=px_data.columns,
+            help="Select which column refers to your A/B testing labels.",)
 
             st.write("""
             ## Mass produced content, increasingly Subjective and Polarised
