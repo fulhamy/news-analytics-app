@@ -4,7 +4,6 @@ import psycopg2, os
 import pandas as pd
 import plotly.express as px
 from PIL import Image
-from webpixels import css, js
 
 def load_data():
     """
@@ -37,10 +36,15 @@ def load_data():
     return df, px_data
 
 def app():
-    # add webpixels css
-    css.add_stylesheet("https://cdn.jsdelivr.net/npm/@webpixels/styles@1.0.0/dist/webpixels.min.css")
-    # add webpixels js
-    js.add_script("https://cdn.jsdelivr.net/npm/@webpixels/styles@1.0.0/dist/webpixels.min.js")
+    # Add custom CSS
+    st.markdown(
+        """
+        <style>
+        /* Add your custom CSS styles here */
+        </style>
+        """,
+        unsafe_allow_html=True,
+    )
 
     st.set_page_config(page_title="ABC News Analysis", page_icon=Image.open("news_icon.png"), layout="wide")
     st.write("""
@@ -57,15 +61,4 @@ def app():
     total_articles = int(df['articles'].sum())
 
     # Function to round to abbreviate a thousand with 'K'
-    def convert_to_thousands(values):
-        return [str(num/1000)+'K' for num in values]
-
-    # Abbreviate article count with thousands
-    px_data['articles_rounded'] = convert_to_thousands(px_data.articles.astype(int))
-
-    col1, col2 = st.columns(2) 
-
-    st.write("""
-    ## Mass produced content, increasingly Subjective and Polarised
-    """)
-    fig = px.bar(px_data, x='date', y='articles',text='articles_rounded',title="Count of Articles by Year")
+   
