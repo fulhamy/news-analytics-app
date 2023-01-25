@@ -1,83 +1,74 @@
-## https://medium.com/@u.praneel.nihar/building-multi-page-web-app-using-streamlit-7a40d55fa5b4#:~:text=As%20mentioned%20already%20streamlit%20does,app%20using%20a%20radio%20button.
-
+from pyramid.config import Configurator
+from pyramid.response import Response
 import yfinance as yf
-import streamlit as st
-import psycopg2, os
 import pandas as pd
+import psycopg2
+import os
 import plotly.express as px
 from PIL import Image
+from webpixels import css, js
+from webpixels.satoshi import satoshi
 
-def app():
-            icon = Image.open("news_icon.png")
+def load_data():
+    """
+    Connects to the database and loads the data.
+    """
+    # read database connection url from the environment variable
+    DATABASE_URL = os.environ.get('DATABASE_URL')
 
-            # read database connection url from the enivron variable we just set.
-            DATABASE_URL = os.environ.get('DATABASE_URL')
+    # create a new database connection
+    con = psycopg2.connect(DATABASE_URL)
 
-            con = None
+    # create a new cursor
+    cur = con.cursor()
+    read_table = """SELECT date, articles::int as articles, polarity, subjectivity as subjectivity
+                    FROM mymatview3
+                    WHERE articles > 10000
+                    ORDER BY 1"""
+    cur.execute(read_table)
 
-            st.write("""
-            # ABC News 
-            Public consciousness is shaped by the News. The purpose of this project is to shine a light on how Australia's public broadcaster influences the public square in the digital age.
-            """)
+    # read data from the database
+    df = pd.read_sql_query(read_table, con)
+    px_data = df.copy()
 
-            try:
-                # create a new database connection by calling the connect() function
-                con = psycopg2.connect(DATABASE_URL)
+    # close the cursor
+    cur.close()
 
-                #  create a new cursor
-                cur = con.cursor()
-                read_table = """SELECT date, articles::int as articles, polarity,subjectivity as subjectivity from mymatview3 where articles > 5000  order by 1"""  
-                cur.execute(read_table)
-                df = pd.read_sql_query(read_table, con)
-                px_data = pd.read_sql_query(read_table, con)
-                df = df.set_index('date')
-                data = df
-                total_articles = int(df['articles'].sum())
+    # close the database connection
+    con.close()
 
-                 # close the communication with the HerokuPostgres
-                cur.close()
-            except Exception as error:
-                print('Could not connect to the Database.')
-                print('Cause: {}'.format(error))
+    return df, px_data
 
-            finally:
-                # close the communication with the database server by calling the close()
-                if con is not None:
-                    con.close()
-                    print('Database connection closed.')
+def app(request):
+    # add webpixels satoshi css
+    css.add_stylesheet("https://cdn.jsdelivr.net/npm/@webpixels/satoshi@1.0.0/dist/webpixels-satoshi.min.css")
+    # add webpixels satoshi js
+    js.add_script("https://cdn.jsdelivr.net/npm/@webpixels/satoshi@1.0.0/dist/webpixels-satoshi.min.js")
+    satoshi()
+    
+    # load data from the database
+    df, px_data = load_data()
 
-            # st.metric(label="Articles", value=int(Total), delta=None)
+    # set index as date
+    df = df.set_index('date')
+    data = df
+    total_articles = int(df['articles'].sum())
 
-            # Sort data before converting to a string for readability
+    # Function to round to abbreviate a thousand with 'K'
+    def convert_to_thousands(values):
+        return [str(num/1000)+'K' for num in values]
 
-            px_data = px_data.sort_values(by=['articles'], ascending=True)
+    # Abbreviate article count with thousands
+    px_data['articles_rounded'] = convert_to_thousands(px_data.articles.astype(int))
 
-            # Function to round to abbreviate a thousand with 'K'
-
-            def convert_to_thousands(values):
-                return [str(num/1000)+'K' for num in values]
-
-            # Abbreviate article count with thousands
-
-            px_data['articles_rounded'] = convert_to_thousands(px_data.articles.astype(int))
-
-            col1, col2 = st.columns(2) 
-            
-            st.multiselect("A/B column",
-            options=px_data.columns,
-            help="Select which column refers to your A/B testing labels.",)
-
-            st.write("""
-            ## Mass produced content, increasingly Subjective and Polarised
-            """)
-            fig = px.bar(px_data, x='date', y='articles',text='articles_rounded',title="Count of Articles by Year")
-            fig.update_traces(textfont_size=12, textangle=0, textposition="outside", cliponaxis=False)
-            st.plotly_chart(fig, use_container_width=True)
-
-            # Sort by Date for Polarity and Subjectivity charts
-            px_data = px_data.sort_values(by=['date'], ascending=True)
-            fig1 = px.line(px_data, x='date', y=px_data.polarity.round(4),text=px_data.polarity.round(4),title="Polarity by Year" )
-            st.plotly_chart(fig1, use_container_width=True)
-
-            fig2 = px.line(px_data, x='date', y=px_data.subjectivity.round(4),text=px_data.subjectivity.round(4),title="Subjectivity by Year" )
-            st.plotly_chart(fig2, use_container_width=True)
+    # create the html content
+    html_content = """
+    <html>
+        <head>
+            <title>ABC News Analysis</title>
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@webpixels/satoshi@1.0.0/dist/webpixels-satoshi.min.css" />
+            <script src="https://cdn.jsdelivr.net/npm/@webpixels/satoshi@1.0.0/dist/webpixels-satoshi.min.js"></script>
+        </head>
+        <body>
+            <div class="container">
+                <h1>ABC News Analysis</
